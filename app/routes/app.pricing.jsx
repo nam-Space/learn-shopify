@@ -1,0 +1,38 @@
+export default function PricingPage() {
+  return (
+    <s-page heading="Pricing page">
+      <s-section heading="Pricing pages">
+        <s-paragraph>
+          Đây là trang pricing page được tạo bởi Nam{" "}
+          <s-link
+            href="https://shopify.dev/docs/apps/tools/app-bridge"
+            target="_blank"
+          >
+            App Bridge
+          </s-link>
+          .
+        </s-paragraph>
+        <s-button variant="primary">Nút đen</s-button>
+        <s-button variant="secondary">Nút trắng</s-button>
+        <s-paragraph>
+          To create your own page and have it show up in the app navigation, add
+          a page inside <code>app/routes</code>, and a link to it in the{" "}
+          <code>&lt;ui-nav-menu&gt;</code> component found in{" "}
+          <code>app/routes/app.jsx</code>.
+        </s-paragraph>
+      </s-section>
+      <s-section slot="aside" heading="Resources">
+        <s-unordered-list>
+          <s-list-item>
+            <s-link
+              href="https://shopify.dev/docs/apps/design-guidelines/navigation#app-nav"
+              target="_blank"
+            >
+              App nav best practices
+            </s-link>
+          </s-list-item>
+        </s-unordered-list>
+      </s-section>
+    </s-page>
+  );
+}
