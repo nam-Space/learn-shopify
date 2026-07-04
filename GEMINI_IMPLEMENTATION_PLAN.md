@@ -46,25 +46,25 @@ A Shopify embedded app that displays product recommendations on PDP (product det
 
 ### Extensions
 
-1. **Theme App Extension - PDP Block** (`extensions/product-recommendations/`)
-   - Liquid block with configurable settings (layout, colors, show/hide elements)
-   - JS fetches recommendations via app proxy, falls back to Shopify Recommendations API
-   - Tracks impressions, clicks, and add-to-cart events
-   - Layouts: grid, slider, list
+1. **Theme App Extension - PDP Block** (`extensions/theme-extension/`)
+   - Liquid block with configurable recommended products using product selectors
+   - Displays a list of up to 3 recommended products on product pages
+   - Uses a simple block schema and Shopify product settings for easy merchant setup
+   - Can be extended later with app proxy or JS-driven recommendations
 
 2. **Checkout UI Extension** (`extensions/checkout-recommendations/`)
-   - Preact + Polaris web components (s-* tags)
+   - Planned but not currently implemented in this repo
    - Cart-based: recommends products related to cart items
-   - Uses `shopify.query()` for Storefront API access
-   - Uses `shopify.applyCartLinesChange()` for add-to-cart
+   - Would use `shopify.query()` for Storefront API access
+   - Would use `shopify.applyCartLinesChange()` for add-to-cart
 
 ### App Proxy
 
-- Route: `app/routes/proxy.recommendations.jsx`
-- Storefront URL: `https://{shop}.myshopify.com/apps/easy-recs`
-- GET: Returns custom recommendations for a product (or empty for Shopify fallback)
-- POST: Tracks analytics events (impression, click, add_to_cart)
-- Enforces plan usage limits
+- Planned route: `app/routes/proxy.recommendations.jsx`
+- Intended storefront URL: `https://{shop}.myshopify.com/apps/easy-recs`
+- GET would return custom recommendations for a product
+- POST would track analytics events (impression, click, add_to_cart)
+- Would enforce plan usage limits
 
 ### Data Models
 
@@ -111,17 +111,13 @@ app/
   routes.js                      # Route config
 
 extensions/
-  product-recommendations/       # Theme app extension (PDP)
+  theme-extension/               # Theme app extension (PDP)
+    blocks/my-app-embed.liquid
     blocks/recommendations.liquid
-    assets/recommendations.js
-    assets/recommendations.css
+    blocks/star_rating.liquid
     locales/en.default.json
     shopify.extension.toml
-  checkout-recommendations/      # Checkout UI extension
-    src/Checkout.jsx
-    locales/en.default.json
-    shopify.extension.toml
-    package.json
+  checkout-recommendations/      # Checkout UI extension planned but not present
 
 prisma/
   schema.prisma                  # Session + Shop models
@@ -156,18 +152,18 @@ npm run typecheck    # TypeScript check
 
 ## Progress Tracker
 
-| Feature                                     | Status |
-| ------------------------------------------- | ------ |
-| Project configuration (shopify.app.toml)    | Done   |
-| Prisma schema + Shop model                  | Done   |
-| Billing setup (3 plans)                     | Done   |
-| Server utilities (billing + metaobjects)    | Done   |
-| Navigation update                           | Done   |
-| Home Dashboard page                         | Done   |
-| Recommendations page (CRUD)                 | Done   |
-| Pricing page                                | Done   |
-| How to Use page                             | Done   |
-| App Proxy route (recs + tracking)           | Done   |
-| Theme App Extension (PDP block)             | Done   |
-| Checkout UI Extension                       | Done   |
-| GEMINI_IMPLEMENTATION_PLAN.md documentation | Done   |
+| Feature                                     | Status  |
+| ------------------------------------------- | ------- |
+| Project configuration (shopify.app.toml)    | Done    |
+| Prisma schema + Shop model                  | Done    |
+| Billing setup (3 plans)                     | Done    |
+| Server utilities (billing + metaobjects)    | Done    |
+| Navigation update                           | Done    |
+| Home Dashboard page                         | Done    |
+| Recommendations page (CRUD)                 | Done    |
+| Pricing page                                | Done    |
+| How to Use page                             | Done    |
+| App Proxy route (recs + tracking)           | Planned |
+| Theme App Extension (PDP block)             | Done    |
+| Checkout UI Extension                       | Planned |
+| GEMINI_IMPLEMENTATION_PLAN.md documentation | Done    |
