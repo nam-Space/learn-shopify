@@ -15,7 +15,7 @@ primary_region = 'sin'
   SHOPIFY_APP_URL = 'https://profitable-merchandise-app-marbled-star-2981.fly.dev'
 
 [processes]
-  app = 'node ./dbsetup.js npm run docker-start'
+  app = 'npm run docker-start'
 
 [[mounts]]
   source = 'data'
@@ -31,6 +31,16 @@ primary_region = 'sin'
   auto_start_machines = true
   min_machines_running = 0
   processes = ['app']
+
+  [[http_service.checks]]
+    path = "/healthcheck"
+    method = "GET"
+    interval = "15s"
+    timeout = "5s"
+    grace_period = "60s"
+
+[deploy]
+  release_command = "npx prisma migrate deploy"
 
 [[vm]]
   memory = '1gb'
