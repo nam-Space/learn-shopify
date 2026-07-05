@@ -2,7 +2,7 @@
 
 client_id = "ade8b574874305b5b41bca4fb3455275"
 name = "profitable-merchandise-app"
-application_url = "https://example.com"
+application_url = "https://profitable-merchandise-app-marbled-star-2981.fly.dev"
 embedded = true
 
 [access_scopes]
@@ -37,15 +37,19 @@ type = "multi_line_text_field"
 api_version = "2026-07"
 
   [[webhooks.subscriptions]]
-  uri = "https://example.com/webhooks/app/uninstalled"
+  uri = "https://profitable-merchandise-app-marbled-star-2981.fly.dev/webhooks/app/uninstalled"
   topics = [ "app/uninstalled" ]
 
   [[webhooks.subscriptions]]
-  uri = "https://example.com/webhooks/app/scopes_update"
+  uri = "https://profitable-merchandise-app-marbled-star-2981.fly.dev/webhooks/app/scopes_update"
   topics = [ "app/scopes_update" ]
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [
+  "https://profitable-merchandise-app-marbled-star-2981.fly.dev/auth/callback",
+  "https://profitable-merchandise-app-marbled-star-2981.fly.dev/auth/shopify/callback",
+  "https://profitable-merchandise-app-marbled-star-2981.fly.dev/api/auth/callback"
+]
 
 [build]
 automatically_update_urls_on_dev = true

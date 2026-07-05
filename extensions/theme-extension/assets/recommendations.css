@@ -1,0 +1,169 @@
+.recommendations-block {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 100%;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.recommendations-block h2 {
+  margin: 0 0 12px;
+  font-size: 18px;
+  color: #111827;
+}
+
+.recommendations-block .rec-message {
+  margin: 0 0 12px;
+  color: #475569;
+  font-size: 14px;
+}
+
+.rec-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.rec-card {
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+.rec-card .rec-link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.rec-card .rec-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #e2e8f0;
+}
+
+.rec-card .rec-image img,
+.rec-item .rec-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.rec-card .rec-meta,
+.rec-item .rec-meta {
+  padding: 12px;
+}
+
+.rec-title {
+  display: block;
+  font-weight: 600;
+  color: #0f172a;
+  margin-bottom: 6px;
+}
+
+.rec-card .rec-description,
+.rec-item .rec-description {
+  margin: 0;
+  color: #475569;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+@media (min-width: 640px) {
+  .rec-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .rec-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.rec-carousel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rec-track-wrapper {
+  overflow: hidden;
+  flex: 1;
+}
+
+.rec-track {
+  display: flex;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  transition: transform 0.35s ease;
+  will-change: transform;
+}
+
+.rec-item {
+  flex: 0 0 auto;
+  width: 100%;
+  min-width: 0;
+}
+
+.rec-item .rec-link {
+  display: block;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #ffffff;
+}
+
+.rec-item .rec-image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: #f8fafc;
+}
+
+.rec-item .rec-meta {
+  padding: 12px;
+}
+
+.rec-prev,
+.rec-next {
+  background: #111827;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+}
+
+.rec-prev[disabled],
+.rec-next[disabled] {
+  opacity: 0.4;
+  cursor: default;
+}
+
+@media (max-width: 520px) {
+  .rec-carousel {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .rec-prev,
+  .rec-next {
+    width: 100%;
+  }
+}

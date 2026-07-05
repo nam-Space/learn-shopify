@@ -1,86 +1,32 @@
-<div class="recommendations-block">
+<div class="recommendations-block"
+     {% if product and product.id %}
+       data-product-id="{{ product.id }}"
+       data-url="/recommendations/products.json?product_id={{ product.id }}&limit={{ block.settings.limit }}&intent=related"
+       data-layout="{{ block.settings.layout }}"
+       data-show-image="{{ block.settings.show_image }}"
+       data-limit="{{ block.settings.limit }}"
+       data-carousel-items="{{ block.settings.carousel_items }}"
+     {% endif %}
+>
   <h2>{{ block.settings.heading }}</h2>
-  <ul>
-    {% if block.settings.title_1 != blank %}
-      <li>
-        <strong>{{ block.settings.title_1 }}</strong>
-        <p>{{ block.settings.description_1 }}</p>
-      </li>
-    {% endif %}
-    {% if block.settings.title_2 != blank %}
-      <li>
-        <strong>{{ block.settings.title_2 }}</strong>
-        <p>{{ block.settings.description_2 }}</p>
-      </li>
-    {% endif %}
-    {% if block.settings.title_3 != blank %}
-      <li>
-        <strong>{{ block.settings.title_3 }}</strong>
-        <p>{{ block.settings.description_3 }}</p>
-      </li>
-    {% endif %}
-  </ul>
+
+  {% unless product and product.id %}
+    <p class="rec-message">This block must be added to a product template to show recommendations.</p>
+  {% else %}
+    <div class="rec-message">Loading recommendations…</div>
+    <ul class="rec-grid" hidden></ul>
+    <div class="rec-carousel" hidden>
+      <button class="rec-prev" aria-label="Previous">‹</button>
+      <div class="rec-track-wrapper">
+        <ul class="rec-track"></ul>
+      </div>
+      <button class="rec-next" aria-label="Next">›</button>
+    </div>
+  {% endunless %}
 </div>
- 
-<style>
-  .recommendations-block {
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.06);
-    border-radius: 8px;
-    padding: 16px;
-    max-width: 720px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
-  }
 
-  .recommendations-block h2 {
-    margin: 0 0 12px 0;
-    font-size: 18px;
-    color: #111827;
-  }
-
-  .recommendations-block ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .recommendations-block li {
-    padding: 10px 12px;
-    border-radius: 6px;
-    background: linear-gradient(180deg, rgba(0,0,0,0.01), rgba(0,0,0,0.00));
-    display: block;
-  }
-
-  .recommendations-block li strong {
-    display: block;
-    font-size: 15px;
-    color: #0f172a;
-    margin-bottom: 4px;
-  }
-
-  .recommendations-block li p {
-    margin: 0;
-    color: #475569;
-    font-size: 13px;
-    line-height: 1.35;
-  }
-
-  @media (min-width: 640px) {
-    .recommendations-block ul {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  @media (min-width: 1000px) {
-    .recommendations-block ul {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-</style>
+<link rel="stylesheet" href="{{ 'recommendations.css' | asset_url }}" />
+<script src="{{ 'recommendations.js' | asset_url }}" defer></script>
 
 {% schema %}
 {
@@ -94,38 +40,39 @@
       "default": "Recommended for this product"
     },
     {
-      "type": "text",
-      "id": "title_1",
-      "label": "Recommendation 1 title",
-      "default": "Bundle with accessories"
+      "type": "select",
+      "id": "layout",
+      "label": "Display style",
+      "options": [
+        { "value": "grid", "label": "Grid" },
+        { "value": "carousel", "label": "Carousel" }
+      ],
+      "default": "grid"
     },
     {
-      "type": "textarea",
-      "id": "description_1",
-      "label": "Recommendation 1 description",
-      "default": "Offer related items together to increase average order value."
+      "type": "number",
+      "id": "limit",
+      "label": "Maximum items",
+      "default": 3
     },
     {
-      "type": "text",
-      "id": "title_2",
-      "label": "Recommendation 2 title",
-      "default": "Feature seasonal picks"
+      "type": "select",
+      "id": "carousel_items",
+      "label": "Carousel items per view",
+      "options": [
+        { "value": "1", "label": "1 item" },
+        { "value": "2", "label": "2 items" },
+        { "value": "3", "label": "3 items" },
+        { "value": "4", "label": "4 items" },
+        { "value": "5", "label": "5 items" }
+      ],
+      "default": "3"
     },
     {
-      "type": "textarea",
-      "id": "description_2",
-      "label": "Recommendation 2 description",
-      "default": "Show products that match current trends and seasonal demand."
-    },
-    {
-      "type": "text",
-      "id": "title_3",
-      "label": "Recommendation 3 title"
-    },
-    {
-      "type": "textarea",
-      "id": "description_3",
-      "label": "Recommendation 3 description"
+      "type": "checkbox",
+      "id": "show_image",
+      "label": "Show image",
+      "default": true
     }
   ]
 }
